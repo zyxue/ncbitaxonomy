@@ -15,8 +15,9 @@ SearchSource.defineSource('lineages', function(searchText, options) {
 });
 
 function buildRegExp(searchText) {
-  // this is a dumb implementation
   var parts = searchText.trim().split(/[ \-\:]+/);
+  // for speeding up regex search, http://docs.mongodb.org/manual/reference/operator/query/regex/
+  parts = parts.map(function(s) {return '^' + s;});
   return new RegExp("(" + parts.join('|') + ")", "ig");
 };
 

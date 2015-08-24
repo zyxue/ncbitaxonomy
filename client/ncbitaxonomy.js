@@ -34,6 +34,13 @@ Template.body.helpers({
 });
 
 
+// Template.body.helpers({
+//   totalNumLineages: function() {
+//     return Lineages.find().count();
+//   },
+// });
+
+
 Template.body.events({
   // use _.throttle to avoid sending every keystroke to the server
   // http://docs.meteor.com/#/full/eventmaps

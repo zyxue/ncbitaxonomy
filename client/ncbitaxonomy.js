@@ -1,15 +1,26 @@
 Template.lineages.helpers({
   getLineages: function() {
     return LineageSearch.getData({
-      transform: function(matchText, regExp) {
-        return matchText.replace(regExp, '<mark>$&</mark>')
-      },
-      sort: {species: -1}
+      docTransform: function(doc) {
+	var res = doc.fields;
+	for (var key in doc.fields) {
+	  if (doc.highlight[key] !== undefined) {
+	    // update fields that have been highlighted.
+	    // because it's an array, e.g. [ 'Proteobacteria' ]
+	    res[key] = doc.highlight[key][0];
+	  }
+	}
+	return res;
+      }
     });
   },
 
   isLoading: function() {
     return LineageSearch.getStatus().loading;
+  },
+
+  isError: function() {
+    return LineageSearch.getStatus().error;
   },
 
 });

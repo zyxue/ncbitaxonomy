@@ -3,9 +3,9 @@ isValidSearchText = function isValidSearchText(str) {
 }
 
 
-// https://meteorhacks.com/implementing-an-instant-search-solution-with-meteor
+// https://github.com/meteorhacks/search-source
 var search_options = {
-  keepHistory: 1000 * 60 * 5,
+  keepHistory: 1000 * 60 * 5,	// in mills
   localSearch: true
 };
 

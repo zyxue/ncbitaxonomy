@@ -5,11 +5,14 @@
 <body>
   <div class="container">
     <header>
-      <h1>NCBI Taxonomy</h1>
+      <h1><a href="ftp://ftp.ncbi.nih.gov/pub/taxonomy/" target="_blank">NCBI Taxonomy</a></h1>
+      <div class="pull-right text-muted">
+	For <strong>quick</strong> search of taxon names, currently returns
+	only first <strong>50</strong> matched entries.
+      </div>
 
       <form class="form-inline lineage-filter">
         <input type="text" name="taxonName" placeholder="Type to get lineages" />
-	<div class="pull-right">{{SearchText}}</div>
       </form>
     </header>
 
@@ -26,26 +29,32 @@
       <p class="text-primary">loading...</p>
     </center>
   {{else}}
-    <table class="table table-condensed table-hover table-striped">
-      <thead>
-	<tr>
-	  <th>Tax ID</th>
-	  <th>Superkingdom</th>
-	  <th>Kingdom</th>
-	  <th>Phylum</th>
-	  <th>Class</th>
-	  <th>Order</th>
-	  <th>Family</th>
-	  <th>Genus</th>
-	  <th>Species</th>
-	</tr>
-      </thead>
-      <tbody>
-	{{#each getLineages}}
-          {{> lineage}}
-	{{/each}}
-      </tbody>
-    </table>
+    {{# if isError}}
+      <center>
+	<p class="text-danger">Ah-oh, this is embarrassing, some error occured, please contact the admin.</p>
+      </center>
+    {{else}}
+      <table class="table table-condensed table-hover table-striped">
+	<thead>
+	  <tr>
+	    <th>Tax ID</th>
+	    <th>Superkingdom</th>
+	    <th>Kingdom</th>
+	    <th>Phylum</th>
+	    <th>Class</th>
+	    <th>Order</th>
+	    <th>Family</th>
+	    <th>Genus</th>
+	    <th>Species</th>
+	  </tr>
+	</thead>
+	<tbody>
+	  {{#each getLineages}}
+            {{> lineage}}
+	  {{/each}}
+	</tbody>
+      </table>
+    {{/if}}
   {{/if}}
 </template>
 
